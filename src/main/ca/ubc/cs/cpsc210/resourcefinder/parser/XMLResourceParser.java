@@ -7,6 +7,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 // Parser for resources in XML format
 public class XMLResourceParser implements IResourceParser {
@@ -17,7 +18,6 @@ public class XMLResourceParser implements IResourceParser {
         this.sourceFileName = sourceFileName;
     }
 
-    // TODO: complete the implementation of this method
     @Override
     public ResourceRegistry parse() throws ResourceParsingException, IOException {
         ResourceRegistry registry = new ResourceRegistry();
@@ -35,11 +35,16 @@ public class XMLResourceParser implements IResourceParser {
             ResourceParsingException resourceParsingException = new ResourceParsingException("SAX parser error");
             resourceParsingException.initCause(e);
             throw resourceParsingException;
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             ResourceParsingException resourceParsingException = new ResourceParsingException("XML format error");
             resourceParsingException.initCause(e);
             throw resourceParsingException;
+        } catch (MalformedURLException e) {
+            ResourceParsingException resourceParsingException = new ResourceParsingException("URL format error");
+            resourceParsingException.initCause(e);
+            throw resourceParsingException;
         }
+
 
         return registry;
     }

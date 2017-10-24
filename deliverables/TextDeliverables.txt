@@ -1,0 +1,14 @@
+ <resource>
+        <name>Family Services of Greater Vancouver</name>
+        <address>201 – 1638 E Broadway, Vancouver, BC V5N 1W1</address>
+        <location>
+            <lat>49.2622</lat>
+            <lon>-123.0709</lon>
+        </location>
+        <webaddress>http://www.fsgv.ca/</webaddress>
+        <phone>604-731-4951</phone>
+        <services>
+            <service>Counselling</service>
+            <service>Youth Services</service>
+        </services>
+ </resource>

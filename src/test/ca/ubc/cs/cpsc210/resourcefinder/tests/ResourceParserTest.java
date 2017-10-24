@@ -32,7 +32,7 @@ public class ResourceParserTest {
 
     @Test
     public void testNumResources() {
-        assertEquals(9, registry.getResources().size());
+        assertEquals(10, registry.getResources().size());
     }
 
     @Test
@@ -55,8 +55,17 @@ public class ResourceParserTest {
     @Test
     public void testLastResource() {
         Resource last = registry.getResources().get(registry.getResources().size() - 1);
-
         // TODO: complete this test method
-        fail("Not yet implemented");
+        assertEquals("Law Students' Legal Advice Program",last.getName());
+        ContactInfo contactInfo = last.getContactInfo();
+        assertEquals("Room 129, Allard Hall, 1822 East Mall, Vancouver, BC V6T 1Z1", contactInfo.getAddress());
+        assertEquals("http://www.lslap.bc.ca", contactInfo.getWebAddress().toString());
+        assertEquals("604-822-5791", contactInfo.getPhoneNumber());
+        GeoPoint locn = contactInfo.getGeoLocation();
+        assertEquals(49.2698666, locn.getLatitude(), DELTA);
+        assertEquals(-123.2535821, locn.getLongitude(), DELTA);
+        Set<Service> services = last.getServices();
+        assertEquals(1, services.size());
+        assertTrue(services.contains(Service.LEGAL));
     }
 }

@@ -32,8 +32,7 @@ public class ResourceParserMissingFieldsTest {
 
     @Test
     public void testNumResources() {
-        // TODO: implement this test method
-        fail("Not yet implemented");
+        assertEquals(3,registry.getResources().size());
     }
 
     @Test
@@ -56,8 +55,18 @@ public class ResourceParserMissingFieldsTest {
     @Test
     public void testLastResource() {
         Resource last = registry.getResources().get(registry.getResources().size() - 1);
+        assertEquals("Family Services", last.getName());
+        ContactInfo contactInfo = last.getContactInfo();
+        assertEquals("1638 E Broadway, Vancouver, BC V5N 1W1", contactInfo.getAddress());
+        assertEquals("http://lookoutsociety.ca", contactInfo.getWebAddress().toString());
+        assertEquals("604-731-4951", contactInfo.getPhoneNumber());
+        GeoPoint locn = contactInfo.getGeoLocation();
+        assertEquals(49.26216, locn.getLatitude(), DELTA);
+        assertEquals(-123.0709403, locn.getLongitude(), DELTA);
+        Set<Service> services = last.getServices();
+        assertEquals(2, services.size());
+        assertTrue(services.contains(Service.COUNSELLING));
+        assertTrue(services.contains(Service.YOUTH));
 
-        // TODO: complete the implementation of this test method
-        fail("Not yet implemented");
     }
 }
