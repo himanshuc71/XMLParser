@@ -109,6 +109,7 @@ public class ResourceHandler extends DefaultHandler {
             }
         }
         accumulator.setLength(0);
+        
 
     }
 
