@@ -16,7 +16,7 @@ public class ResourceHandler extends DefaultHandler {
     private StringBuilder accumulator;
 
 
-    private String name, address, latstr, lonstr;
+    private String name, address, latStr, lonStr;
     private double lat;
     private double lon;
     private String webAddressStr;
@@ -39,8 +39,8 @@ public class ResourceHandler extends DefaultHandler {
         if (qName.toLowerCase().equals("resource")) {
             name = "";
             address = "";
-            latstr = "";
-            lonstr = "";
+            latStr = "";
+            lonStr = "";
             lat = 0.0;
             lon = 0.0;
             webAddressStr = "";
@@ -63,11 +63,11 @@ public class ResourceHandler extends DefaultHandler {
         } else if (qName.toLowerCase().equals("address")) {
             address = accumulator.toString().trim();
         } else if (qName.toLowerCase().equals("lat")) {
-            latstr = accumulator.toString().trim();
-            lat = Double.parseDouble(latstr);
+            latStr = accumulator.toString().trim();
+            lat = Double.parseDouble(latStr);
         } else if (qName.toLowerCase().equals("lon")) {
-            lonstr = accumulator.toString().trim();
-            lon = Double.parseDouble(lonstr);
+            lonStr = accumulator.toString().trim();
+            lon = Double.parseDouble(lonStr);
         } else if (qName.toLowerCase().equals("webaddress")) {
             webAddressStr = accumulator.toString().trim();
             try {
@@ -75,6 +75,7 @@ public class ResourceHandler extends DefaultHandler {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
+
         } else if (qName.toLowerCase().equals("location")) {
             geoLocation = new GeoPoint(lat, lon);
         } else if (qName.toLowerCase().equals("phone")) {
@@ -98,8 +99,8 @@ public class ResourceHandler extends DefaultHandler {
                     && webAddress != null && !phone.equals("") && services.size() != 0) {
                 contactInfo = new ContactInfo(address, geoLocation, webAddress, phone);
                 resource = new Resource(name, contactInfo);
-                for (Service s : services) {
-                    resource.addService(s);
+                for (Service next : services) {
+                    resource.addService(next);
                 }
                 registry.addResource(resource);
             }
@@ -109,7 +110,7 @@ public class ResourceHandler extends DefaultHandler {
             }
         }
         accumulator.setLength(0);
-        
+
 
     }
 
